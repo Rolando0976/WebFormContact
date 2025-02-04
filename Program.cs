@@ -3,7 +3,7 @@ using WebFormContact.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Entity FrameWork Core
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
