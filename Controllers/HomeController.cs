@@ -13,13 +13,15 @@ namespace WebFormContact.Controllers
         }
 
         [HttpPost]
-        public IActionResult Submit(ContactMessage model)
+        public IActionResult Submit(ContactViewModel model)
         {
             if (!ModelState.IsValid)
             {
+                model.Mensajes = _context.ContactMessages.ToList();
                 return View("Index", model);
+
             }
-            _context.ContactMessages.Add(model);
+            _context.ContactMessages.Add(model.NuevoMensaje);
             _context.SaveChanges();
 
             TempData["SuccessMessage"] = "Tu mensaje ha sido enviado con éxito.";
@@ -28,9 +30,13 @@ namespace WebFormContact.Controllers
 
         public IActionResult Index()
         {
-            return View();
-        }
-
+            var viewModel = new ContactViewModel
+            {
+                NuevoMensaje = new ContactMessage(),
+                Mensajes = _context.ContactMessages.ToList()
+            };
+            return View(viewModel);
+        } 
         public IActionResult Privacy()
         {
             return View();

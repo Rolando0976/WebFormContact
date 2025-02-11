@@ -18,4 +18,12 @@ namespace WebFormContact.Models
         [StringLength(500, ErrorMessage = "El mensaje no puede exceder los 500 caracteres")]
         public string Mensaje { get; set; }
     }
+
+    public class ContactViewModel
+    {
+        public ContactMessage NuevoMensaje { get; set; }
+
+        public List<ContactMessage> Mensajes { get; set; } = new List<ContactMessage>();
+    }
+
 }
